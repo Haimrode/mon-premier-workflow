@@ -12,7 +12,7 @@ permissions:
   issues: write
   contents: read
 
-# 🏗️ Définition des tâches (jobs)
+# 🏗️ Définition des tâches (jobs) et
 jobs:
   add-comment:
     runs-on: ubuntu-latest
