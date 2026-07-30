@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "label": "Status",
-  "message": "Initializing...",
-  "color": "gray"
+  "label": "Commits",
+  "message": "14",
+  "color": "blue"
 }
