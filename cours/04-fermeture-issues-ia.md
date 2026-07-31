@@ -422,13 +422,24 @@ cat matches.json
 ## Validation
 
 **Préparation**
-- [ ] Le secret `OPENAI_API_KEY` existe dans `Settings → Secrets and variables → Actions`
+- [ ] Le secret existe dans `Settings → Secrets and variables → Actions`
 - [ ] L'onglet **Issues** est activé
 - [ ] Le workflow est **mergé sur `main` avant** d'ouvrir la PR de démonstration
 
 > 💡 **Pourquoi sur `main` ?** Attention, on lit souvent la mauvaise raison. Pour `pull_request`, GitHub utilise le fichier présent **dans la branche de la PR** — un workflow ajouté dans une branche s'y déclenche très bien. La vraie raison : si le fichier est sur `main`, **toute branche créée ensuite l'embarque automatiquement**.
 >
 > 📌 La restriction « le workflow doit être sur la branche par défaut » existe bel et bien — mais pour `issues`, `issue_comment`, `schedule`, `workflow_dispatch`… **pas pour `pull_request`.**
+
+> 🔧 **Dans CE dépôt** : le secret s'appelle `API_KEY` (hérité de l'exemple 04), pas `OPENAI_API_KEY`. Le branchement se fait dans le workflow :
+>
+> ```yaml
+> env:
+>   OPENAI_API_KEY: ${{ secrets.API_KEY }}
+> #  ↑ nom de la VARIABLE       ↑ nom du SECRET
+> #    lue par le script          stocké dans GitHub
+> ```
+>
+> Les deux n'ont **aucune obligation** de porter le même nom. Cette ligne est le branchement entre l'un et l'autre — exactement comme un adaptateur de prise.
 
 **Le chemin nominal**
 - [ ] Une issue décrit un problème **en français, sans citer de fichier**

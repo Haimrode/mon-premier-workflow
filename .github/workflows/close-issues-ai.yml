@@ -119,7 +119,17 @@ jobs:
       # ─────────────────────────────────────────────────────────────
       - name: 🤖 Demander à l'IA quelles issues ce code résout
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}   # 🔒 secret du dépôt
+          # 🔒 Le secret de CE dépôt s'appelle API_KEY (créé à l'exemple 04),
+          #    alors que le script attend la variable OPENAI_API_KEY.
+          #    À gauche du `:` = le nom de la VARIABLE lue par le script.
+          #    À droite      = le nom du SECRET stocké dans GitHub.
+          #    Les deux n'ont aucune obligation de se ressembler : cette ligne
+          #    est justement le branchement entre les deux.
+          #
+          #    💡 Le cours écrit `secrets.OPENAI_API_KEY`. Un nom de secret qui
+          #       dit quelle API il ouvre vaut mieux qu'un « API_KEY » générique
+          #       — dans six mois, on ne saura plus. À renommer un jour.
+          OPENAI_API_KEY: ${{ secrets.API_KEY }}
         run: node scripts/match-issues.js diff.txt issues.json matches.json
 
       # ─────────────────────────────────────────────────────────────
